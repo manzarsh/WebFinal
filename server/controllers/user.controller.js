@@ -37,7 +37,7 @@ error: "User not found"
 req.profile = user 
 next()
 } catch (err) {
-return res.status('400').json({ 
+return res.status(400).json({ 
 error: "Could not retrieve user"
 }) 
 }
@@ -64,21 +64,37 @@ error: errorHandler.getErrorMessage(err)
 })
 } 
 }
-
-
 const remove = async (req, res) => { 
-try {
-let user = req.profile
-let deletedUser = await user.deleteOne() 
-deletedUser.hashed_password = undefined 
-deletedUser.salt = undefined
-res.json(deletedUser) 
-} catch (err) {
-return res.status(400).json({
-error: errorHandler.getErrorMessage(err) 
-})
-} 
-}
+  try {
+  let user = req.profile
+  let deletedUser = await user.deleteOne() 
+  deletedUser.hashed_password = undefined 
+  deletedUser.salt = undefined
+  res.json(deletedUser) 
+  } catch (err) {
+  return res.status(400).json({
+  error: errorHandler.getErrorMessage(err) 
+  })
+  } 
+  }
+  const removeMany = async (req, res) => {
+    const { ids } = req.body; // Assuming IDs are sent in the request body
+    if (!Array.isArray(ids) || ids.length === 0) {
+        return res.status(400).json({
+            error: "Please provide an array of IDs to delete."
+        });
+    }
+    try {
+        const result = await User.deleteMany({ _id: { $in: ids } });
+        return res.status(200).json({
+            message: `${result.deletedCount} users successfully deleted!`
+        });
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        });
+    }
+};
 
 export default { create, userByID, read, list, remove, update }
 

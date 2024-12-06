@@ -18,8 +18,7 @@ const ContactSchema = new mongoose.Schema({
  unique: 'Email already exists',
  match: [/.+\@.+\..+/, 'Please fill a valid email address'],
  required: 'Email is required'
- },
- 
+ }
  });
 //module.exports = mongoose.model('User', UserSchema);
 export default mongoose.model('Contact', ContactSchema);

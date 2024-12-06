@@ -15,7 +15,7 @@ mongoose.connection.on('error', () => {
 throw new Error(`unable to connect to database: ${config.mongoUri}`) 
 })
 app.get("/", (req, res) => {
-res.json({ message: "Welcome to DressStore application." });
+res.json({ message: "Welcome to Weather based Tourist application." });
 });
 app.listen(config.port, (err) => { 
 if (err) {
@@ -24,8 +24,3 @@ console.log(err)
 console.info('Server started on port %s.', config.port) 
 })
 
-const PORT = process.env.PORT || 8080;
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
