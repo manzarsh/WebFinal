@@ -1,0 +1,15 @@
+{
+  "images/Logo1.png": {
+    "file": "assets/Logo1-CuM9CdAr.png",
+    "src": "images/Logo1.png"
+  },
+  "src/main.jsx": {
+    "file": "assets/main-Cdb3AQsG.js",
+    "name": "main",
+    "src": "src/main.jsx",
+    "isEntry": true,
+    "css": [
+      "assets/main-Bvj-gQOF.css"
+    ]
+  }
+}
